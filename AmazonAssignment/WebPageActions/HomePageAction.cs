@@ -34,17 +34,37 @@ namespace AmazonAssignment.WebPageActions
             //By using this particular product is searched by clicking the enter key instead search icon
             element.SendKeys(Keys.Enter);
             ScreenShot.TakeScreenShot(driver);
-            System.Threading.Thread.Sleep(10000);
-            ListOfProductsListed(driver);
+            System.Threading.Thread.Sleep(15000);
+            ListOfProductsBrandName(driver);
+            
         }
 
-        public static void ListOfProductsListed(IWebDriver driver)
+        //Used to retrive brand's name
+        public static void ListOfProductsBrandName(IWebDriver driver)
         {
-            IList<IWebElement> productdetails = driver.FindElements(By.ClassName("s-line-clamp-1"));
-            foreach(IWebElement currentproductdetails in productdetails)
+            //Getting the list of product brand's name by using class
+            IList<IWebElement> productbrandname = driver.FindElements(By.ClassName("s-line-clamp-1"));
+            foreach (IWebElement currentproductbrandname in productbrandname)
             {
-                string productname = currentproductdetails.Text;
-                Console.WriteLine(productname);
+                //getting the brandname of each current product 
+                //Text is used to get the name of innerelements in webpages
+                    string brandname = currentproductbrandname.Text;
+                    Console.WriteLine(brandname);
+            }
+            //Calling this method to print the ratings of each product 
+                RatingsOfEachBrandedProduct(driver);
+        }
+
+        //Used to retrive ratings of each product
+        public static void RatingsOfEachBrandedProduct(IWebDriver driver)
+        {
+            //getting the ratings of each product by using aria-label 
+            IList<IWebElement> productrating = driver.FindElements(By.CssSelector("span[aria-label]"));
+            foreach (IWebElement currentproductrating in productrating)
+            {
+                //rating of each product is displayed
+                string rating = currentproductrating.Text;
+                Console.WriteLine(rating);
             }
         }
     }
