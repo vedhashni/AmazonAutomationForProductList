@@ -31,13 +31,13 @@ namespace AmazonAssignment.WebPageActions
         {
             excel = new ExcelOperation();
             sign = new LoginPage(driver);
-            ScreenShot.TakeScreenShot(driver);
+            //ScreenShot.TakeScreenShot(driver);
             sign.login.Click();
             System.Threading.Thread.Sleep(1000);
-            ScreenShot.TakeScreenShot(driver);
+            //ScreenShot.TakeScreenShot(driver);
             //By invoking the readdate method values in table is retrived
             sign.email.SendKeys(excel.ReadData(1, "Email"));
-            ScreenShot.TakeScreenShot(driver);
+            //ScreenShot.TakeScreenShot(driver);
             //is used to wait in a particular page before taking another action
             System.Threading.Thread.Sleep(1000);
             //Here we click continue button for further process
@@ -46,10 +46,10 @@ namespace AmazonAssignment.WebPageActions
             System.Threading.Thread.Sleep(1000);
             //By invoking the readdate method values in table is retrived
             sign.password.SendKeys(excel.ReadData(1, "Password"));
-            ScreenShot.TakeScreenShot(driver);
+            //ScreenShot.TakeScreenShot(driver);
             System.Threading.Thread.Sleep(1000);
             sign.signin.Click();
-            ScreenShot.TakeScreenShot(driver);
+            //ScreenShot.TakeScreenShot(driver);
             System.Threading.Thread.Sleep(10000);
             //Here we call Searchproductsinamazonafterlogin method for searching the product
             HomePageAction.SearchProductsInAmazonAfterLogin(driver);
