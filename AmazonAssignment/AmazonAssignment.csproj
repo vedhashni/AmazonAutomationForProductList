@@ -22,4 +22,13 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="93.0.4577.6300" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Report\extent-config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -1,16 +1,16 @@
 ﻿using OpenQA.Selenium;
-using System;
+
 
 namespace AmazonAssignment.TakeScreeShot
 {
-    public class ScreenShot
+    public class ScreenShot:Base.BaseClass
     {
         //Used to takescreenshot of the webactions done
-        public static void TakeScreenShot(IWebDriver driver)
+        public void TakeScreenShot()
         {
             ITakesScreenshot screenshot = driver as ITakesScreenshot;
             Screenshot screenshot1 = screenshot.GetScreenshot();
-            screenshot1.SaveAsFile(@"C:\Users\vedhashni.v\source\repos\AmazonAssignment\AmazonAssignment\TakeScreeShot\AmazonTest" + DateTime.Now.ToString("HHmmss") + ".png");
+            screenshot1.SaveAsFile(@"C:\Users\vedhashni.v\source\repos\AmazonAssignment\AmazonAssignment\TakeScreeShot\AmazonTest.png");
         }
     }
 }
