@@ -15,11 +15,15 @@ namespace AmazonAssignment.Data
         [CacheLookup]
         public IWebElement product;
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='add-to-wishlist-button-submit']")]
+        [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Add to Wish List')]")]
         [CacheLookup]
         public IWebElement addtowishlist;
 
-        [FindsBy(How = How.XPath, Using = "//span[@class='w-button-text']")]
+        [FindsBy(How = How.XPath, Using = "//input[@id='add-to-wishlist-button-submit']")]
+        [CacheLookup]
+        public IWebElement againaddtowishlist;
+
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'View Wish List')]")]
         [CacheLookup]
         public IWebElement viewwishlist;
 
@@ -39,9 +43,33 @@ namespace AmazonAssignment.Data
         [CacheLookup]
         public IWebElement usethisaddressbtn;
 
-        [FindsBy(How = How.Name, Using = "ppw-instrumentRowSelection")]
+        [FindsBy(How = How.XPath, Using = "//body[1]/div[5]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/form[1]/div[1]/div[1]/div[1]/div[2]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/label[1]/input[1]")]
         [CacheLookup]
         public IWebElement selectmodeofpayment;
+
+        [FindsBy(How = How.XPath, Using = "//span[@id='orderSummaryPrimaryActionBtn']")]
+        [CacheLookup]
+        public IWebElement usethispaymentbtn;
+
+        //Used to find the element email by specifying its locator
+        [FindsBy(How = How.Name, Using = "email")]
+        [CacheLookup]
+        public IWebElement email;
+
+        //Used to find the continue button by specifying its locator
+        [FindsBy(How = How.Id, Using = "continue")]
+        [CacheLookup]
+        public IWebElement continuebtn;
+
+        //Used to find the element password by specifying its locator
+        [FindsBy(How = How.Id, Using = "ap_password")]
+        [CacheLookup]
+        public IWebElement password;
+
+        //Used to find the signin button by specifying its locator
+        [FindsBy(How = How.Id, Using = "signInSubmit")]
+        [CacheLookup]
+        public IWebElement signin;
 
     }
 }

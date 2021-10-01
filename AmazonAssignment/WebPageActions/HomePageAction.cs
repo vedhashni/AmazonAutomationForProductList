@@ -12,10 +12,7 @@ namespace AmazonAssignment.WebPageActions
         //Here we use Searchproductsinamazonafterlogin method for searching the product
         public void SearchProductsInAmazonAfterLogin()
         {
-            loginPage = new LoginPageAction();
             shot = new ScreenShot();
-            loginPage.ReadDataFromExcel();
-            loginPage.LoginIntoAmazon();
             try
             {
                 shot.TakeScreenShot();
@@ -43,7 +40,6 @@ namespace AmazonAssignment.WebPageActions
                 shot.TakeScreenShot();
                 //System.Threading.Thread.Sleep(15000);
                 System.Threading.Thread.Sleep(15000);
-                ListOfProductsBrandName();
             }
             catch
             {
@@ -53,7 +49,7 @@ namespace AmazonAssignment.WebPageActions
         }
 
         //Used to retrive brand's name
-        public static void ListOfProductsBrandName()
+        public void ListOfProductsBrandName()
         {
             try
             {
@@ -68,7 +64,6 @@ namespace AmazonAssignment.WebPageActions
                 }
                 //Calling this method to print the ratings of each product 
                 //RatingsOfEachBrandedProduct();
-                PriceOfProduct();
             }
             catch
             {
@@ -99,7 +94,7 @@ namespace AmazonAssignment.WebPageActions
                         }
                     }
                 }
-                PriceOfProduct();
+                
             }
             catch
             {
@@ -107,7 +102,7 @@ namespace AmazonAssignment.WebPageActions
             }
         }
 
-        public static void PriceOfProduct()
+        public void PriceOfProduct()
         {
             try
             {

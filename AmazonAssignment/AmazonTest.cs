@@ -4,21 +4,38 @@
 */
 
 
+using AmazonAssignment.Email;
+using AmazonAssignment.NegativeTestCase;
 using AmazonAssignment.TakeScreeShot;
 using AmazonAssignment.WebPageActions;
 using AventStack.ExtentReports;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace AmazonAssignment
 {
+    [TestFixture("chrome")]
+    [TestFixture("firefox")]
+    [Parallelizable(ParallelScope.Fixtures)]
+
     public class AmazonTest:Base.BaseClass
     {
+        public AmazonTest(string browser) : base(browser)
+        {
+
+        }
+
         public static LoginPageAction login;
         public static HomePageAction homePage;
         public static ProductPage product;
         public static ScreenShot shot;
+        public static InvalidLoginPageAction invalidLogin;
+        public static EmailClass email;
         ExtentReports report = Report.report();
         ExtentTest test;
+
+
         //Used to read the data from excel
         //Used to login into Amazon with credentials given in the excel
         [Test, Order(0)]
@@ -44,13 +61,30 @@ namespace AmazonAssignment
         {
             homePage = new HomePageAction();
             homePage.SearchProductsInAmazonAfterLogin();
+            homePage.ListOfProductsBrandName();
+            homePage.PriceOfProduct();
         }
 
-        [Test,Order(2)]
+        [Test, Order(2)]
         public void TestMethodForPlaceOrder()
         {
             product = new ProductPage();
             product.AddParticularProductToCart();
+        }
+
+        [Test, Order(3)]
+        public void TestMethodNegativeTestCase()
+        {
+            invalidLogin = new InvalidLoginPageAction();
+            invalidLogin.CheckInvalidLogin();
+        }
+
+        [Test, Order(4)]
+        public void TestMethodForSendingReportByEmail()
+        {
+            email = new EmailClass();
+            email.ReadDataFromExcel();
+            email.email_send();
         }
     }
 }

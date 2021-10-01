@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using AmazonAssignment.Data;
 
-namespace AmazonAssignment.WebPageActions
+namespace AmazonAssignment.Email
 {
-    public class ExcelOperation
+    public class ExcelOperationForEmail
     {
         public DataTable ExcelData(string filename)
         {
@@ -36,38 +36,32 @@ namespace AmazonAssignment.WebPageActions
         static List<DataCollection> Datas = new List<DataCollection>();
         public void PopulateFromExcel(string filename)
         {
-            try
-            {
-                DataTable dataTable = ExcelData(filename);
 
-                //Here we are using loop for to count row aand value
-                for (int row = 1; row <= dataTable.Rows.Count; row++)
+            DataTable dataTable = ExcelData(filename);
+
+            //Here we are using loop for to count row aand value
+            for (int row = 1; row <= dataTable.Rows.Count; row++)
+            {
+                for (int col = 0; col < dataTable.Columns.Count; col++)
                 {
-                    for (int col = 0; col < dataTable.Columns.Count; col++)
+                    DataCollection collections = new DataCollection()
                     {
-                        DataCollection collections = new DataCollection()
-                        {
 
-                            rownumber = row,
-                            //Getting the column name 
-                            colname = dataTable.Columns[col].ColumnName,
-                            //getting the column value 
-                            colvalue = dataTable.Rows[row - 1][col].ToString()
-                        };
-                        Datas.Add(collections);
-                    }
+                        rownumber = row,
+                        //Getting the column name 
+                        colname = dataTable.Columns[col].ColumnName,
+                        //getting the column value 
+                        colvalue = dataTable.Rows[row - 1][col].ToString()
+                    };
+                    Datas.Add(collections);
                 }
-            }
-            catch
-            {
-                throw new CustomException(CustomException.ExceptionType.FileNotFoundException, "File not found");
             }
         }
 
         public string ReadData(int rowNumber, string ColumnName)
         {
             //Here we retrive the data from table by using the query
-            string data = (from colData in Datas where colData.colname == ColumnName && colData.rownumber == rowNumber select colData.colvalue).First();
+            string data = (from colData in Datas where colData.colname == ColumnName && colData.rownumber == rowNumber select colData.colvalue).SingleOrDefault();
             return data.ToString();
         }
     }
