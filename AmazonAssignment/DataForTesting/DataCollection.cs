@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace AmazonAssignment.Data
+namespace AmazonAssignment.DataForTesting
 {
     public class DataCollection
     {

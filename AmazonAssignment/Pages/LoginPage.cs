@@ -1,15 +1,19 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace AmazonAssignment.NegativeTestCase
+namespace AmazonAssignment.Pages
 {
-    public class InvalidLoginPageData
+    public class LoginPage
     {
         //Used to intialize elements of a page class
-        public InvalidLoginPageData(IWebDriver driver)
+        public LoginPage(IWebDriver driver)
         {
             PageFactory.InitElements(driver, this);
         }
+
+        [FindsBy(How = How.Id, Using = "nav-logo")]
+        [CacheLookup]
+        public IWebElement logo;
 
         //Used to find the sigin button by specifying its locator
         [FindsBy(How = How.XPath, Using = "//a[@id='nav-link-accountList']")]
@@ -36,12 +40,8 @@ namespace AmazonAssignment.NegativeTestCase
         [CacheLookup]
         public IWebElement signin;
 
-        //[FindsBy(How = How.XPath, Using = "//body/div[@id='a-page']/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]")]
-        //[CacheLookup]
-        //public IWebElement errormessage;
-
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'To better protect your account, please re-enter your password and then enter the characters as they are shown in the image below.')]")]
+        [FindsBy(How = How.XPath, Using = "//*[text()='Hello, Velmurugan']")]
         [CacheLookup]
-        public IWebElement alertmessage;
+        public IWebElement message;
     }
 }

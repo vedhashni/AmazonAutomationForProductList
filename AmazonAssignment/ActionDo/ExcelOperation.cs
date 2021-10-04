@@ -1,14 +1,14 @@
-﻿using System.Data;
-using System.IO;
+﻿using AmazonAssignment.DataForTesting;
 using ExcelDataReader;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
-using AmazonAssignment.Data;
 
-namespace AmazonAssignment.Email
+namespace AmazonAssignment.ActionDo
 {
-    public class ExcelOperationForEmail
+    public class ExcelOperation:Base.BaseClass
     {
         public DataTable ExcelData(string filename)
         {
@@ -36,32 +36,38 @@ namespace AmazonAssignment.Email
         static List<DataCollection> Datas = new List<DataCollection>();
         public void PopulateFromExcel(string filename)
         {
-
-            DataTable dataTable = ExcelData(filename);
-
-            //Here we are using loop for to count row aand value
-            for (int row = 1; row <= dataTable.Rows.Count; row++)
+            try
             {
-                for (int col = 0; col < dataTable.Columns.Count; col++)
-                {
-                    DataCollection collections = new DataCollection()
-                    {
+                DataTable dataTable = ExcelData(filename);
 
-                        rownumber = row,
-                        //Getting the column name 
-                        colname = dataTable.Columns[col].ColumnName,
-                        //getting the column value 
-                        colvalue = dataTable.Rows[row - 1][col].ToString()
-                    };
-                    Datas.Add(collections);
+                //Here we are using loop for to count row aand value
+                for (int row = 1; row <= dataTable.Rows.Count; row++)
+                {
+                    for (int col = 0; col < dataTable.Columns.Count; col++)
+                    {
+                        DataCollection collections = new DataCollection()
+                        {
+
+                            rownumber = row,
+                            //Getting the column name 
+                            colname = dataTable.Columns[col].ColumnName,
+                            //getting the column value 
+                            colvalue = dataTable.Rows[row - 1][col].ToString()
+                        };
+                        Datas.Add(collections);
+                    }
                 }
+            }
+            catch
+            {
+                throw new CustomException(CustomException.ExceptionType.FileNotFoundException, "File not found");
             }
         }
 
         public string ReadData(int rowNumber, string ColumnName)
         {
             //Here we retrive the data from table by using the query
-            string data = (from colData in Datas where colData.colname == ColumnName && colData.rownumber == rowNumber select colData.colvalue).SingleOrDefault();
+            string data = (from colData in Datas where colData.colname == ColumnName && colData.rownumber == rowNumber select colData.colvalue).First();
             return data.ToString();
         }
     }

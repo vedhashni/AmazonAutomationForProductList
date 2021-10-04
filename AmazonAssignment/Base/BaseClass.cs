@@ -1,30 +1,17 @@
-﻿using AmazonAssignment.WebPageActions;
-using log4net;
+﻿using log4net;
 using log4net.Config;
 using log4net.Repository;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using System.IO;
 using System.Reflection;
 
 namespace AmazonAssignment.Base
 {
-    [TestFixture]
     public class BaseClass
     {
-        private string browser;
-        public BaseClass()
-        {
-
-        }
-        public BaseClass(string browser)
-        {
-            this.browser = browser;
-        }
         public static IWebDriver driver;
-        public static ExcelOperation excel;
         //Get Logger for fully qualified name for type of 'AlertTests' class
         private static readonly ILog log = LogManager.GetLogger(typeof(AmazonTest));
 
@@ -42,16 +29,7 @@ namespace AmazonAssignment.Base
             XmlConfigurator.Configure(repository, fileInfo);
             try
             {
-                switch (browser)
-                {
-                    case "chrome":
-                        driver = new ChromeDriver();
-                        break;
-                    case "firefox":
-                        driver = new FirefoxDriver();
-                        break;
-                }
-                //driver = new ChromeDriver();
+                driver = new ChromeDriver();
                 log.Info("Configured");
                 driver.Url = "https://www.amazon.in/";
                 log.Debug("navigating to url");
@@ -70,6 +48,13 @@ namespace AmazonAssignment.Base
         {
             //Used to close the opened session
             driver.Quit();
+        }
+
+        public void TakeScreenShot()
+        {
+            ITakesScreenshot screenshot = driver as ITakesScreenshot;
+            Screenshot screenshot1 = screenshot.GetScreenshot();
+            screenshot1.SaveAsFile(@"C:\Users\vedhashni.v\source\repos\AmazonAssignment\AmazonAssignment\TakeScreeShot\AmazonTest.png");
         }
     }
 }
