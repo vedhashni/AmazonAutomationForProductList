@@ -69,11 +69,25 @@ namespace AmazonAssignment
             pageaction.ToPlaceOrder();
         }
 
-        [Test, Order(5)]
+        [Test,Order(5)]
+        public void TestMethodToLogout()
+        {
+            pageaction = new DoAction();
+            pageaction.LogoutFromAmazon();
+        }
+
+        [Test, Order(6)]
         public void TestMethodForSendingReportByEmail()
         {
            email = new EmailClass();
             email.ToSendReportThroughEmail();
+        }
+
+        [Test, Order(67)]
+        public void TestMethodForInvalidLogin()
+        {
+            pageaction = new DoAction();
+            pageaction.CheckInvalidLogin();
         }
     }
 }

@@ -43,5 +43,9 @@ namespace AmazonAssignment.Pages
         [FindsBy(How = How.XPath, Using = "//*[text()='Hello, Velmurugan']")]
         [CacheLookup]
         public IWebElement message;
+
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'To better protect your account, please re-enter your password and then enter the characters as they are shown in the image below.')]")]
+        [CacheLookup]
+        public IWebElement alertmessage;
     }
 }

@@ -13,10 +13,10 @@ namespace AmazonAssignment.Base
     {
         public static IWebDriver driver;
         //Get Logger for fully qualified name for type of 'AlertTests' class
-        private static readonly ILog log = LogManager.GetLogger(typeof(AmazonTest));
+        public static readonly ILog log = LogManager.GetLogger(typeof(AmazonTest));
 
         //Get the default ILoggingRepository
-        private static readonly ILoggerRepository repository = LogManager.GetRepository(Assembly.GetCallingAssembly());
+        public static readonly ILoggerRepository repository = LogManager.GetRepository(Assembly.GetCallingAssembly());
         
         [SetUp]
         public void BrowserTest()
